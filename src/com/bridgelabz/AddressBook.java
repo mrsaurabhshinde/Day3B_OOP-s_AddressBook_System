@@ -5,30 +5,40 @@ import java.util.Scanner;   //import scanner class
 public class AddressBook {
 
     public static void main(String[] args) {
-
         System.out.println("Welcome to Address Book");
 
-        Scanner sc = new Scanner(System.in);  //create object for scanner class
+        Scanner sc = new Scanner(System.in);
 
-        AddressBookDe person = new AddressBookDe(); //create object person
+        AddressBookDe Book = new AddressBookDe();
+        Book.addContact();//Calling Add Contacts Method
+        System.out.println(Book.person);
+        System.out.println("Enter the choice \n 1. Edit \n 2. Delete");
+        int option = sc.nextInt();
 
-        person.addContact();//Calling Add Contacts Method
+        //using switch case statement
 
-        System.out.println("Enter Y To Edit The Contact");
+        switch (option) {
+            case 1:
+                Book.editContact();
+                System.out.println("You have Entered following data");
+                System.out.println(Book.person);
+                System.out.println("Thank you for Using the Address book");
+                break;
 
-        String op = sc.nextLine();
-
-        if (op.equals("y") || op.equals("Y")) {
-
-            System.out.println("You have Entered following data");
-            System.out.println("The Contact Details After Editing : " + person);
+            case 2:
+                Book.deleteContact();
+                System.out.println("Address Book details :" + Book.person);
+                break;
         }
     }
-
 }
+
 /*
-person contact details
- */
+create a Contacts in Address
+Book with first and last names, address,
+city, state, zip, phone number and
+email...
+*/
 
 
 class contactDetails {
@@ -104,6 +114,10 @@ class contactDetails {
 
 }
 
+/* add a new
+Contact to Address Book
+*/
+
 class AddressBookDe {
 
 
@@ -137,9 +151,10 @@ class AddressBookDe {
         person.setEmail(email);
         System.out.println("The Contact Details of " + firstName + "\n" + person);
     }
-/*
-edit contact details
- */
+
+   /*
+   edit existing contact person using their name
+    */
 
     public void editContact() {
         System.out.println("Enter the firstName of person");
@@ -149,5 +164,20 @@ edit contact details
         else
             System.out.println("The Entered First Name Is Not Match");
         editContact();
+    }
+
+/*
+delete a
+person using
+person's name
+ */
+
+    public void deleteContact() {
+        System.out.println("Enter firstName of the person");
+        String editName = sc.nextLine();
+        if (editName.equals(person.getFirstName())) {
+            System.out.println("Deleted " + person.getFirstName() + " details");
+            person = null;
+        }
     }
 }
